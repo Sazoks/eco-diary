@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # My apps.
     'apps.main',
     'apps.lessons',
+    'apps.pages',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'apps.main.context_processors.add_menu',
+                'apps.pages.context_processors.add_menu',
             ],
         },
     },

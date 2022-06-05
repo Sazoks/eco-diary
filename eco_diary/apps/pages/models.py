@@ -1,6 +1,4 @@
-from pathlib import Path
 from django.db import models
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -16,6 +14,7 @@ class StaticPage(models.Model):
 
     url = models.SlugField(
         max_length=128,
+        unique=True,
         verbose_name=_('URL-адрес'),
         help_text=_('Если Вы хотите получить URL-адрес вида https://domain/p'
                     'age, тогда просто введите page.'),
@@ -60,17 +59,6 @@ class StaticPage(models.Model):
 
         verbose_name = _('Статичная страница')
         verbose_name_plural = _('Статичные страницы')
-
-    def delete(self, *args, **kwargs):
-        """Переопределенный метод удаления записи из БД"""
-
-        # Удаляем изображение из файловой системы, если оно есть.
-        removed_img = Path(settings.MEDIA_ROOT + str(self.preview))
-        print(removed_img)
-        if removed_img.exists():
-            removed_img.unlink()
-
-        return super(StaticPage, self).delete(*args, **kwargs)
 
     def __str__(self):
         return self.title

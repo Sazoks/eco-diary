@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Other apps.
     'ckeditor',
     'ckeditor_uploader',
+    'django_cleanup',
 
     # My apps.
     'apps.main',
@@ -166,5 +167,14 @@ CKEDITOR_UPLOAD_PATH = 'ckeditor/'
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
+    },
+    'minimal': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            {
+                'name': 'colors',
+                'items': ['TextColor', 'BGColor'],
+            }
+        ]
     },
 }

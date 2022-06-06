@@ -57,6 +57,13 @@ class Research(models.Model):
 class Lesson(models.Model):
     """Модель урока"""
 
+    url_pattern = models.SlugField(
+        max_length=128,
+        unique=128,
+        verbose_name=_('Название страницы в URL'),
+        help_text=_('Если Вы хотите получить URL-адрес вида https://domain/p'
+                    'age, тогда просто введите page.'),
+    )
     description = models.TextField(
         null=True,
         blank=True,

@@ -10,5 +10,5 @@ class StaticPageView(DetailView):
     template_name = 'pages/static_page.html'
     model = StaticPage
     context_object_name = 'page'
-    slug_field = 'url'
-    slug_url_kwarg = 'page_path'
+    slug_field = 'url_pattern'
+    slug_url_kwarg = 'url_pattern'

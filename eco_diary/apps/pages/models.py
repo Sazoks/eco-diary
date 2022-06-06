@@ -12,10 +12,10 @@ class StaticPage(models.Model):
     определяется с помощью CKE-редактора.
     """
 
-    url = models.SlugField(
+    url_pattern = models.SlugField(
         max_length=128,
         unique=True,
-        verbose_name=_('URL-адрес'),
+        verbose_name=_('Название страницы в URl'),
         help_text=_('Если Вы хотите получить URL-адрес вида https://domain/p'
                     'age, тогда просто введите page.'),
     )

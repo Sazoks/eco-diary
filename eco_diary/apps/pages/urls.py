@@ -5,5 +5,5 @@ from . import views
 
 app_name = 'pages'
 urlpatterns = [
-    path('<slug:page_path>/', views.StaticPageView.as_view(), name='static_page'),
+    path('<slug:url_pattern>/', views.StaticPageView.as_view(), name='static_page'),
 ]

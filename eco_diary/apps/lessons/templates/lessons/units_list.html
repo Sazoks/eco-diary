@@ -9,8 +9,23 @@
 <body>
     <div>
         {% for unit in units %}
-        <div>{{ unit.title }}</div><br>
-        
+        <hr>
+        <h1>{{ unit.title }}</h1><br>
+        <div>
+            {% for lesson in unit.lessons.all %}
+            <a href="{% url 'lessons:lesson' lesson.url_pattern %}">
+                <img src="{{ lesson.preview.url }}" alt="{{ forloop.counter }}" width="80px" height="80px">
+                <div>{{ lesson.title }}</div>
+                <div>{{ lesson.serial_number }}</div>
+            </a>
+            {% endfor %}
+            <br>
+            <a href="{% url 'lessons:research' unit.research.url_pattern %}">
+                <h3>Исследование</h3>
+            </a>
+        </div>
+        <hr>
+        <br><br>
         {% endfor %}
     </div>
 </body>

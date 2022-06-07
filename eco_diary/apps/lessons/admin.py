@@ -19,6 +19,11 @@ class SliderInline(admin.StackedInline):
     model = models.Slide
 
 
+class PracticalTaskStepInline(admin.StackedInline):
+    extra = 0
+    model = models.PracticalTaskStep
+
+
 class AddMaterialInline(admin.StackedInline):
     extra = 0
     model = models.AddMaterial
@@ -30,6 +35,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_display_links = ('title', )
     inlines = (
         SliderInline,
+        PracticalTaskStepInline,
         AddMaterialInline,
     )
 

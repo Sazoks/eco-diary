@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Слайдер</h1><br>
+        <div>
+            {% for slide in lesson.slides.all %}
+            <img src="{{ slide.image.url }}" alt="{{ forloop.counter0 }}" width="100px" height="50px">
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <div>
+        <h1>Тренажер</h1><br>
+        <div>{{ lesson.trainer.text }}</div><br>
+        <h3>Ответы</h3><br>
+        {% for answer in lesson.trainer.answers.all %}
+        <div>{{ answer.text }}</div><br>
+        {% endfor %}
+    </div>
+    <br>
+    <div>
+        <h1>Это интересно епта!</h1><br>
+        <img src="{{ lesson.interesting_img.url }}" alt="" width="100px" height="100px"><br>
+        <div>{{ lesson.interesting_text }}</div>
+    </div>
+    <br>
+    <div>
+        <h1>Игра</h1><br>
+        <img src="{{ lesson.game.first_image.url }}" alt="" width="60px" height="60px">
+        <img src="{{ lesson.game.second_image.url }}" alt="" width="60px" height="60px"><br>
+        <div>
+            {% for answer in lesson.game.answers.all %}
+            <div>{{ answer.text }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <div>
+        <h1>Практика</h1><br>
+        {% for step in lesson.practical_steps.all %}
+        <div>
+            <h1>{{ forloop.counter }}</h1>
+            <img src="{{ step.image.url }}" alt="">
+            <span>{{ step.text }}</span>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+    <div>
+        <h1>Доп. матеральчики сука нахуй</h1><br>
+        {% for m in lesson.add_materials.all %}
+        <div>
+            <img src="{{ m.image.url }}" alt="">
+            <div>{{ m.text }}</div>
+        </div>
+        <br>
+        {% endfor %}
+    </div><br>
+</body>
+</html>

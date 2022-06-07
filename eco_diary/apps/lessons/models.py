@@ -38,6 +38,13 @@ class Research(models.Model):
         related_query_name='research',
         verbose_name=_('Раздел'),
     )
+    url_pattern = models.SlugField(
+        max_length=128,
+        unique=True,
+        verbose_name=_('Название страницы в URL'),
+        help_text=_('Если Вы хотите получить URL-адрес вида https://domain/p'
+                    'age, тогда просто введите page.'),
+    )
     content = RichTextUploadingField(
         null=True,
         blank=True,
@@ -59,7 +66,7 @@ class Lesson(models.Model):
 
     url_pattern = models.SlugField(
         max_length=128,
-        unique=128,
+        unique=True,
         verbose_name=_('Название страницы в URL'),
         help_text=_('Если Вы хотите получить URL-адрес вида https://domain/p'
                     'age, тогда просто введите page.'),
@@ -74,6 +81,10 @@ class Lesson(models.Model):
         max_length=128,
         verbose_name=_('Название урока'),
     )
+    preview = models.ImageField(
+        upload_to='lessons/preview',
+        verbose_name=_('Превью-изображение'),
+    )
     serial_number = models.CharField(
         max_length=32,
         verbose_name=_('Порядковый номер'),
@@ -85,11 +96,19 @@ class Lesson(models.Model):
     )
     interesting_img = models.ImageField(
         upload_to='lessons/interesting',
-        verbose_name=_('Изображение блока "Это интересно"'),
+        verbose_name=_('Изображение'),
     )
     interesting_text = models.TextField(
         max_length=4096,
-        verbose_name=_('Текст блока "Это интересно"'),
+        verbose_name=_('Текст'),
+    )
+    fact_img = models.ImageField(
+        upload_to='lessons/fact',
+        verbose_name=_('Изображение'),
+    )
+    fact_text = models.TextField(
+        max_length=4096,
+        verbose_name=_('Текст'),
     )
     unit = models.ForeignKey(
         to=Unit,
@@ -225,10 +244,14 @@ class Game(Question):
 
     first_image = models.ImageField(
         upload_to='lessons/game',
+        null=True,
+        blank=True,
         verbose_name=_('Первое изображение для игры'),
     )
     second_image = models.ImageField(
         upload_to='lessons/game',
+        null=True,
+        blank=True,
         verbose_name=_('Второе изображение для игры'),
     )
     lesson = models.OneToOneField(

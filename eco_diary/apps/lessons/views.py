@@ -30,3 +30,6 @@ class ResearchView(DetailView):
     http_method_names = ('get', )
     template_name = 'lessons/research.html'
     model = models.Research
+    context_object_name = 'research'
+    slug_field = 'url_pattern'
+    slug_url_kwarg = 'url_pattern'

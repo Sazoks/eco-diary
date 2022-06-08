@@ -11,10 +11,17 @@ class Unit(models.Model):
         max_length=128,
         verbose_name=_('Название раздела'),
     )
-    image = models.ImageField(
+    img_1 = models.ImageField(
         upload_to='units',
-        verbose_name=_('Изображение'),
-        help_text=_('Это изображение будет находиться правее от исследования.'),
+        verbose_name=_('Изображение 1'),
+    )
+    img_2 = models.ImageField(
+        upload_to='units',
+        verbose_name=_('Изображение 2'),
+    )
+    img_3 = models.ImageField(
+        upload_to='units',
+        verbose_name=_('Изображение 3'),
     )
 
     class Meta:
@@ -109,6 +116,12 @@ class Lesson(models.Model):
     fact_text = models.TextField(
         max_length=4096,
         verbose_name=_('Текст'),
+    )
+    practical_title = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        verbose_name=_('Название практического задания'),
     )
     unit = models.ForeignKey(
         to=Unit,

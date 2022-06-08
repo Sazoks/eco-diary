@@ -1,1 +1,142 @@
-главная
+{% load static %}
+
+<!DOCTYPE html> 
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="{% static 'css/libs.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <title>Главная</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class='header'>
+            <div class='container'>
+                <div class='header__inner'>
+                    <a href="" class="header__logo">
+                        <img src="{% static 'img/logo.svg' %}" alt="">
+                    </a>
+                    <button class="header__burger"></button>
+                    <div class="header__mob">
+                        <a href="" class="header__green">
+                            <img src="{% static 'img/greenTat.svg' %}" alt="">
+                        </a>
+                        <a href="" class="header__eko">
+                            <img src="{% static 'img/akbars.png' %}" alt="">
+                        </a>
+                        <nav class="nav">
+                            <a href="" class="nav__link nav__link--active">ГЛАВНАЯ</a>
+                            <a href="" class="nav__link">УРОКИ</a>
+                            <a href="" class="nav__link">О ПРОЕКТЕ</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="content">
+
+            <section class='main'>
+                <div class="main__img">
+                    <img src="{% static 'img/main-img.webp' %}" alt="">
+                </div>
+                <h1 class="main__title display1 green-text">Экологический дневник</h1>
+
+                <div class="main__wrap">
+                    <div class="main__subtitle display3">Дорогой школьник!</div>
+                    <div class="main__desc">
+                        <p>Ак Барс Банк дарит тебе увлекательный электронный дневник об экологии. В нём собраны уроки, благодаря которым ты станешь настоящим супергероем и сможешь позаботиться об окружающей среде. Не бойся «двоек» или замечаний: в роли учителя
+                            и ученика лишь ты сам. </p>
+
+                        <p>Беречь природу – это очень важная и непростая миссия, но ты с ней обязательно справишься. Дневник, друзья и родные, конечно, помогут тебе в этом. </p>
+
+                        <p>Тебе предстоит открыть много полезных фактов: как собирать березовый сок, правильно развешивать скворечники. Ты получишь ответ на вопрос, нужны ли зоопарки и многое другое. </p>
+
+                        <p>Ориентироваться в Дневнике нетрудно: он разделен на четыре главы: «Растения», «Птицы», «Животные» и «Человек». В каждой ты найдёшь интересные шарады и задания. Они не дадут заскучать и обогатят тебя знаниями и навыками, которые
+                            пригодятся для защиты нашей планеты. </p>
+
+                        <p>Желаю верных и добрых друзей, отличных оценок и невероятных открытий! Прислушивайся к учителям и родителям, будь смелым и всегда заботься о Земле – она у нас одна!</p>
+
+                    </div>
+                    <div class="main__bottom">
+                        <span>С самыми добрыми пожеланиями,</span>
+                        <span>Председатель Правления Ак Барс Банка</span>
+                        <span class="main__name">Зуфар Фанилович Гараев</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class='story'>
+                <!-- <img src="img/triangle.svg" alt="" class="story__img story__img1"> -->
+                <div class='container'>
+                    <div class='story__top'>
+                        <div class="story__users">
+                            <div class="story__user">
+                                <img src="{% static 'img/man.webp'%}" alt="">
+                            </div>
+                            <div class="story__user">
+                                <img src="{% static 'img/man3.webp' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="story__desc">Герои экологического дневника приготовили для тебя новую историю!</div>
+                    </div>
+
+                    <div class="story__slider">
+                        <div class='swiper-container'>
+                            <div class='swiper-wrapper'>
+                                <div class='story__item swiper-slide'>
+                                    <div class="story__item-img">
+                                        <img src="{% static 'img/story.webp' %}" alt="">
+                                        <img src="{% static 'img/arrow.svg' %}" alt="" class="story__item-arrow">
+                                    </div>
+                                    <div class="story__item-title">Вместе с ними ты узнаешь, можно ли собирать берёзовый сок? </div>
+                                </div>
+                                <div class='story__item swiper-slide'>
+                                    <div class="story__item-img">
+                                        <img src="{% static 'img/story2.webp' %}" alt="">
+                                        <img src="{% static 'img/arrow2.svg' %}" alt="" class="story__item-arrow">
+                                    </div>
+                                    <div class="story__item-title">Как правильно развешивать скворечники?</div>
+                                </div>
+                                <div class='story__item swiper-slide'>
+                                    <div class="story__item-img">
+                                        <img src="{% static 'img/story3.webp' %}" alt="">
+                                        <img src="{% static 'img/arrow3.svg' %}" alt="" class="story__item-arrow">
+                                    </div>
+                                    <div class="story__item-title">Нужны ли зоопарки, так ли хороши солнечные батареи и многое другое.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class='swiper-pagination'></div>
+                    </div>
+
+                    <a href="" class="story__btn btn">Уроки</a>
+                </div>
+            </section>
+
+        </main>
+        <footer class='footer'>
+            <div class='container'>
+                <div class='footer__inner'>
+                    <div class="footer__by">2022 © Экологический дневник</div>
+                    <nav class="footer__nav">
+                        <a href="" class="footer__nav-link">Главная</a>
+                        <a href="" class="footer__nav-link">Уроки</a>
+                        <a href="" class="footer__nav-link">О проекте</a>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/libs.min.js' %}"></script>
+    <script src="{% static 'js/main.min.js' %}"></script>
+
+</body>
+
+</html>

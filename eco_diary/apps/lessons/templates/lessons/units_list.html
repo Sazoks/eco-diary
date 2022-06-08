@@ -1,32 +1,272 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+
+<!DOCTYPE html> <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="{% static 'css/libs.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <title>Главная</title>
 </head>
+
 <body>
-    <div>
-        {% for unit in units %}
-        <hr>
-        <h1>{{ unit.title }}</h1><br>
-        <div>
-            {% for lesson in unit.lessons.all %}
-            <a href="{% url 'lessons:lesson' lesson.url_pattern %}">
-                <img src="{{ lesson.preview.url }}" alt="{{ forloop.counter }}" width="80px" height="80px">
-                <div>{{ lesson.title }}</div>
-                <div>{{ lesson.serial_number }}</div>
+    <div class="wrapper">
+        <header class='header'>
+    <div class='container'>
+        <div class='header__inner'>
+            <a href="" class="header__logo">
+                <img src="{% static 'img/logo.svg' %}" alt="">
             </a>
-            {% endfor %}
-            <br>
-            <a href="{% url 'lessons:research' unit.research.url_pattern %}">
-                <h3>Исследование</h3>
-            </a>
+            <button class="header__burger"></button>
+            <div class="header__mob">
+                <a href="" class="header__green">
+                    <img src="{% static 'img/greenTat.svg' %}" alt="">
+                </a>
+                <a href="" class="header__eko">
+                    <img src="{% static 'img/akbars.png' %}" alt="">
+                </a>
+                <nav class="nav">
+                    <a href="" class="nav__link nav__link--active">ГЛАВНАЯ</a>
+                    <a href="" class="nav__link">УРОКИ</a>
+                    <a href="" class="nav__link">О ПРОЕКТЕ</a>
+                </nav>
+            </div>
         </div>
-        <hr>
-        <br><br>
-        {% endfor %}
     </div>
+</header>
+        <main class="content">
+
+            <section class='lessons'>
+                <div class='container'>
+                    <div class="lessons__title display1">Уроки</div>
+                    <div class='lessons__inner'>
+                        <div class="lessons__group">
+                            <div class="lessons__group-title green-text">Растения</div>
+                            <div class="lessons__group-grid">
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Деревья</div>
+<div class="lesson-card__num">урок 1-2</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson2.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Подснежники</div>
+<div class="lesson-card__num">урок 3-4</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson3.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Берёзовый сок</div>
+<div class="lesson-card__num">урок 5-6</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson4.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Польза растений и бережное отношение к ним</div>
+<div class="lesson-card__num">урок 7-8</div>
+                                </a>
+                                <div class="lessons__group-bottom">
+                                    <div class="lessons__images">
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc.webp' %}" alt="">
+                                        </div>
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc2.webp' %}" alt="">
+                                        </div>
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc3.webp' %}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="lessons__research">
+                                        <div class="lessons__research-img">
+                                            <img src="{% static 'img/research.png' %}" alt="">
+                                        </div>
+                                        <div class="lessons__research-title">Исследование</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lessons__group">
+                            <div class="lessons__group-title blue-text">Птицы</div>
+                            <div class="lessons__group-grid">
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson5.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 9-10</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson6.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 11-12</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson7.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 13-14</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson8.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 15-16</div>
+                                </a>
+                                <div class="lessons__group-bottom">
+                                    <div class="lessons__images">
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc4.webp' %}" alt="">
+                                        </div>
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc5.webp' %}" alt="">
+                                        </div>
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc6.webp' %}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="lessons__research">
+                                        <div class="lessons__research-img">
+                                            <img src="{% static 'img/research.png' %}" alt="">
+                                        </div>
+                                        <div class="lessons__research-title">Исследование</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lessons__group">
+                            <div class="lessons__group-title yellow-text">Животные</div>
+                            <div class="lessons__group-grid">
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson9.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 17-18</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson10.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 19-20</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson11.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 21-22</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson12.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 23-24</div>
+                                </a>
+                                <div class="lessons__group-bottom">
+                                    <div class="lessons__images">
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc7.webp' %}" alt="">
+                                        </div>
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc8.webp' %}" alt="">
+                                        </div>
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc9.webp' %}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="lessons__research">
+                                        <div class="lessons__research-img">
+                                            <img src="{% static 'img/research.png' %}" alt="">
+                                        </div>
+                                        <div class="lessons__research-title">Исследование</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lessons__group">
+                            <div class="lessons__group-title red-text">Человек</div>
+                            <div class="lessons__group-grid">
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson13.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 25-26</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson14.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 27-28</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson15.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 29-30</div>
+                                </a>
+                                <a href="" class="lesson-card">
+                                    <div class="lesson-card__img">
+    <img src="{% static 'img/lesson16.webp' %}" alt="">
+</div>
+<div class="lesson-card__title">Урок</div>
+<div class="lesson-card__num">Урок 31-32</div>
+                                </a>
+                                <div class="lessons__group-bottom">
+                                    <div class="lessons__images lessons__images--full">
+                                        <div class="lessons__img">
+                                            <img src="{% static 'img/desc10.webp' %}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="lessons__research">
+                                        <div class="lessons__research-img">
+                                            <img src="{% static 'img/research.png' %}" alt="">
+                                        </div>
+                                        <div class="lessons__research-title">Исследование</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <footer class='footer'>
+    <div class='container'>
+        <div class='footer__inner'>
+            <div class="footer__by">2022 © Экологический дневник</div>
+            <nav class="footer__nav">
+                <a href="" class="footer__nav-link">Главная</a>
+                <a href="" class="footer__nav-link">Уроки</a>
+                <a href="" class="footer__nav-link">О проекте</a>
+            </nav>
+        </div>
+    </div>
+</footer>
+    </div>
+
+    <script src="{% static 'js/libs.min.js' %}"></script>
+<script src="{% static 'js/main.min.js' %}"></script>
+
 </body>
+
 </html>

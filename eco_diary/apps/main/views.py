@@ -12,4 +12,4 @@ class AboutProjectView(TemplateView):
     """Класс-контроллер страницы 'О проекте'"""
 
     http_method_names = ('get', )
-    template_name = 'main/about_project.html'
+    template_name = 'main/about.html'

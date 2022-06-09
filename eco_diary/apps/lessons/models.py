@@ -37,14 +37,6 @@ class Unit(models.Model):
 class Research(models.Model):
     """Модель исследования"""
 
-    unit = models.OneToOneField(
-        to=Unit,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='research',
-        related_query_name='research',
-        verbose_name=_('Раздел'),
-    )
     url_pattern = models.SlugField(
         max_length=128,
         unique=True,
@@ -56,6 +48,14 @@ class Research(models.Model):
         null=True,
         blank=True,
         verbose_name=_('Контент'),
+    )
+    unit = models.OneToOneField(
+        to=Unit,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='research',
+        related_query_name='research',
+        verbose_name=_('Раздел'),
     )
 
     class Meta:
@@ -126,7 +126,7 @@ class Lesson(models.Model):
     unit = models.ForeignKey(
         to=Unit,
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='lessons',
         related_query_name='lesson',
         verbose_name=_('Раздел'),
@@ -137,6 +137,7 @@ class Lesson(models.Model):
 
         verbose_name = _('Урок')
         verbose_name_plural = _('Уроки')
+        order_with_respect_to = 'unit'
 
     def __str__(self):
         return self.title
@@ -156,7 +157,7 @@ class Slide(models.Model):
     lesson = models.ForeignKey(
         to=Lesson,
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='slides',
         related_query_name='slide',
         verbose_name=_('Урок'),
@@ -221,7 +222,7 @@ class Trainer(Question):
     lesson = models.OneToOneField(
         to=Lesson,
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='trainer',
         related_query_name='trainer',
         verbose_name=_('Урок'),
@@ -270,7 +271,7 @@ class Game(Question):
     lesson = models.OneToOneField(
         to=Lesson,
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='game',
         related_query_name='game',
         verbose_name=_('Урок'),
@@ -315,7 +316,7 @@ class PracticalTaskStep(models.Model):
     lesson = models.ForeignKey(
         to=Lesson,
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='practical_steps',
         related_query_name='practical_step',
         verbose_name=_('Урок'),
@@ -351,7 +352,7 @@ class AddMaterial(models.Model):
     lesson = models.ForeignKey(
         to=Lesson,
         null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='add_materials',
         related_query_name='add_material',
         verbose_name=_('Урок'),

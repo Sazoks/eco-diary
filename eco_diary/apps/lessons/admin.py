@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from . import models
 
@@ -38,6 +39,24 @@ class LessonAdmin(admin.ModelAdmin):
         PracticalTaskStepInline,
         AddMaterialInline,
     )
+    fieldsets = (
+        (_('Системная информация'), {
+            'fields': ('url_pattern', 'description', 'unit'),
+        }),
+        (_('Основная информация'), {
+            'fields': (
+                'title', 'preview', 'serial_number',
+                'background_image', 'practical_title',
+            ),
+        }),
+        (_('Это интересно'), {
+            'fields': ('interesting_img', 'interesting_text'),
+        }),
+        (_('Факт'), {
+            'fields': ('fact_img', 'fact_text'),
+        }),
+    )
+    list_filter = ('unit', )
 
 
 class TrainerAnswerInline(admin.StackedInline):

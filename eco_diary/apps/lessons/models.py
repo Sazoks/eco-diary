@@ -7,7 +7,8 @@ from django.utils.translation import gettext_lazy as _
 class Unit(models.Model):
     """Модель блока уроков"""
 
-    title = models.CharField(
+    title = RichTextField(
+        config_name='minimal',
         max_length=128,
         verbose_name=_('Название раздела'),
     )
@@ -56,7 +57,6 @@ class Research(models.Model):
     )
     unit = models.OneToOneField(
         to=Unit,
-        null=True,
         on_delete=models.CASCADE,
         related_name='research',
         related_query_name='research',
@@ -130,7 +130,6 @@ class Lesson(models.Model):
     )
     unit = models.ForeignKey(
         to=Unit,
-        null=True,
         on_delete=models.CASCADE,
         related_name='lessons',
         related_query_name='lesson',
@@ -161,7 +160,6 @@ class Slide(models.Model):
     )
     lesson = models.ForeignKey(
         to=Lesson,
-        null=True,
         on_delete=models.CASCADE,
         related_name='slides',
         related_query_name='slide',
@@ -226,7 +224,6 @@ class Trainer(Question):
     )
     lesson = models.OneToOneField(
         to=Lesson,
-        null=True,
         on_delete=models.CASCADE,
         related_name='trainer',
         related_query_name='trainer',
@@ -275,7 +272,6 @@ class Game(Question):
     )
     lesson = models.OneToOneField(
         to=Lesson,
-        null=True,
         on_delete=models.CASCADE,
         related_name='game',
         related_query_name='game',
@@ -304,7 +300,7 @@ class GameAnswer(Answer):
         """Настройки модели"""
 
         verbose_name = _('Ответ для игры')
-        verbose_name_plural = _('Ответы для игр')
+        verbose_name_plural = _('Ответы для игры')
 
 
 class PracticalTaskStep(models.Model):
@@ -320,7 +316,6 @@ class PracticalTaskStep(models.Model):
     )
     lesson = models.ForeignKey(
         to=Lesson,
-        null=True,
         on_delete=models.CASCADE,
         related_name='practical_steps',
         related_query_name='practical_step',
@@ -356,7 +351,6 @@ class AddMaterial(models.Model):
     )
     lesson = models.ForeignKey(
         to=Lesson,
-        null=True,
         on_delete=models.CASCADE,
         related_name='add_materials',
         related_query_name='add_material',

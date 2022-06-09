@@ -19,7 +19,7 @@
             <section class='lesson-top'>
                 <div class='container'>
                     <div class='lesson-top__inner'>
-                        <a href="" class="lesson-top__back">
+                        <a href="{% url 'lessons:units' %}" class="lesson-top__back">
                             <svg width="33" height="24" viewBox="0 0 33 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.93934 10.9393C0.353553 11.5251 0.353553 12.4749 0.93934 13.0607L10.4853 22.6066C11.0711 23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97918 12.6066 1.3934C12.0208 0.807612 11.0711 0.807612 10.4853 1.3934L0.93934 10.9393ZM33 10.5L2 10.5V13.5L33 13.5V10.5Z" fill="#9AC2EC"/>
                             </svg>
@@ -45,11 +45,7 @@
                                 </svg>
                             </a>
                             {% endif %}
-                            <div class="lesson__nums">
-                                <span class="lesson__nums-title">урок</span>
-                                <span class="lesson__nums-badge"> {{ lesson.serial_number }}</span>
-                            </div>
-                            <div class="lesson__title">{{ lesson.title }}</div>
+                            <div class="lesson__title">Исследование</div>
                             {% if next_lesson is not None %}
                             <a href="{% url 'lessons:lesson' next_lesson.url_pattern %}" class="lesson__next">
                                 <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +55,9 @@
                             </a>
                             {% endif %}
                         </div>
-                        <div class="lesson-field"></div>
+                        <div class="lesson-field">
+                            {{ research.content|safe }}
+                        </div>
                     </div>
                 </div>
             </section>

@@ -92,7 +92,7 @@ class LessonView(DetailView):
 
             # Если урок в разделе всего один.
             if len(lesson_id_list) == 1:
-                next_research = self.object.research
+                next_research = self.object.unit.research
                 if current_unit_index > 0:
                     prev_research = units[current_unit_index - 1].research
             # Если урок первый, но есть и другие уроки.
@@ -176,7 +176,9 @@ class ResearchView(DetailView):
         # Если текущий раздел не последний, то берем первый урок в
         # следующем разделе.
         if current_unit_index < units.count() - 1:
-            next_lesson = units[current_unit_index + 1].lessons.first()
+            next_unit = units[current_unit_index + 1]
+            if next_unit.lessons.exists():
+                next_lesson = units[current_unit_index + 1].lessons.first()
 
         return {
             'prev_lesson': prev_lesson,

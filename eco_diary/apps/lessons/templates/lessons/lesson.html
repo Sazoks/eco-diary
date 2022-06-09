@@ -211,41 +211,41 @@
                         <div class="lesson-nav__prev">
                             {% if prev_lesson is not None %}
                             <a href="{% url 'lessons:lesson' prev_lesson.url_pattern %}" class="lesson-nav__link">Предыдущий урок</a>
-                            <div class="lesson-card">
+                            <a href="{% url 'lessons:lesson' prev_lesson.url_pattern %}" class="lesson-card">
                                 <div class="lesson-card__img">
                                     <img src="{{ prev_lesson.preview.url }}" alt="Изображение предыдущего урока">
                                 </div>
                                 <div class="lesson-card__title">{{ prev_lesson.title }}</div>
                                 <div class="lesson-card__num">урок {{ prev_lesson.serial_number }}</div>
-                            </div>
+                            </a>
                             {% elif prev_research is not None %}
                             <a href="{% url 'lessons:research' prev_research.url_pattern %}" class="lesson-nav__link">Предыдущее исследование</a>
-                            <div class="lesson-card">
+                            <a href="{% url 'lessons:research' prev_research.url_pattern %}" class="lesson-card">
                                 <div class="lesson-card__img">
                                     <img src="{% static 'img/research.png' %}" alt="Изображение предыдущего исследования">
                                 </div>
                                 <div class="lesson-card__title">Исследование "{{ prev_research.unit.title }}"</div>
-                            </div>
+                            </a>
                             {% endif %}
                         </div>
                         <div class="lesson-nav__next">
                             {% if next_lesson is not None %}
                             <a href="{% url 'lessons:lesson' next_lesson.url_pattern %}" class="lesson-nav__link">Следующий урок</a>
-                            <div class="lesson-card">
+                            <a href="{% url 'lessons:lesson' next_lesson.url_pattern %}" class="lesson-card">
                                 <div class="lesson-card__img">
                                     <img src="{{ next_lesson.preview.url }}" alt="Изображение предыдущего урока">
                                 </div>
                                 <div class="lesson-card__title">{{ next_lesson.title }}</div>
                                 <div class="lesson-card__num">урок {{ next_lesson.serial_number }}</div>
-                            </div>
+                            </a>
                             {% elif next_research is not None %}
                             <a href="{% url 'lessons:research' next_research.url_pattern %}" class="lesson-nav__link">Следующее исследование</a>
-                            <div class="lesson-card">
+                            <a href="{% url 'lessons:research' next_research.url_pattern %}" class="lesson-card">
                                 <div class="lesson-card__img">
                                     <img src="{% static 'img/research.png' %}" alt="Изображение следующего исследования">
                                 </div>
                                 <div class="lesson-card__title">Исследование "{{ next_research.unit.title }}"</div>
-                            </div>
+                            </a>
                             {% endif %}
                         </div>
                     </div>

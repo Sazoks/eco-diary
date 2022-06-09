@@ -14,8 +14,8 @@ class StaticPageAdmin(admin.ModelAdmin):
     list_display_links = ('title', )
     list_filter = ('in_menu', )
     fieldsets = (
-        (_('Служебная информация'), {
-            'fields': ('url', 'preview', 'description'),
+        (_('Системная информация'), {
+            'fields': ('url_pattern', 'preview', 'description', 'in_menu'),
         }),
         (_('Основная информация'), {
             'fields': ('title', 'content'),

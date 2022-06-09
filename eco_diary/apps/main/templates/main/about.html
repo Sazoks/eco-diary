@@ -34,7 +34,7 @@
                     <a href="{% url 'lessons:units' %}" class="nav__link">УРОКИ</a>
                     <a href="{% url 'main:about' %}" class="nav__link nav__link--active">О ПРОЕКТЕ</a>
                     {% for menu_element in menu %}
-                    <a href="{% url 'pages:static_page' menu_element.url_pattern %}">{{ menu_element.title|upper }}</a>
+                    <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link">{{ menu_element.title|upper }}</a>
                     {% endfor %}
                 </nav>
             </div>

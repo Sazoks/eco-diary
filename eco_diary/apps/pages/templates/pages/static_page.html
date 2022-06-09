@@ -30,11 +30,15 @@
                     <img src="{% static 'img/akbars.png' %}" alt="">
                 </a>
                 <nav class="nav">
-                    <a href="" class="nav__link nav__link--active">ГЛАВНАЯ</a>
-                    <a href="" class="nav__link">УРОКИ</a>
-                    <a href="" class="nav__link">О ПРОЕКТЕ</a>
+                    <a href="{% url 'main:index' %}" class="nav__link">ГЛАВНАЯ</a>
+                    <a href="{% url 'lessons:units' %}" class="nav__link">УРОКИ</a>
+                    <a href="{% url 'main:about' %}" class="nav__link">О ПРОЕКТЕ</a>
                     {% for menu_element in menu %}
-                    <a href="{% url 'pages:static_page' menu_element.url_pattern %}">{{ menu_element.title|upper }}</a>
+                    {% if menu_element.pk == page.pk %}
+                    <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link nav__link--active">{{ menu_element.title|upper }}</a>
+                    {% else %}
+                    <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link">{{ menu_element.title|upper }}</a>
+                    {% endif %}
                     {% endfor %}
                 </nav>
             </div>
@@ -45,17 +49,11 @@
 
             <section class='about'>
                 <div class='about__top'>
-                    <div class="about__title display1">О проекте</div>
+                    <div class="about__title display1">{{ page.title }}</div>
                 </div>
                 <div class='container'>
-                    <div class="about__subtitle">«Экологический дневник» – это проект в виде электронной рабочей тетради.</div>
-                    <div class="about__img">
-                        <img src="{% static 'img/about.webp' %}" alt="">
-                    </div>
                     <div class="about__desc">
-                        <p>Электронная рабочая тетрадь предназначена для исследовательской работы и факультативных занятий среди учащихся начальной школы (2–3 класс) и учащихся «экологических» классов Республики Татарстан в течение учебного года. </p>
-                        <p>Тетрадь содержит системную и наглядную информацию об экологии, которая способствует вовлечению детей в изучение окружающей среды и приобретению ими практических навыков разумного и бережного отношения к природным ресурсам своей
-                            родины, полезных экологических привычек, формированию чувства любви к окружающему миру, природе родного края и воспитанию экологически грамотных граждан.</p>
+                        {{ page.content|safe }}
                     </div>
                 </div>
             </section>

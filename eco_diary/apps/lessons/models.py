@@ -23,12 +23,17 @@ class Unit(models.Model):
         upload_to='units',
         verbose_name=_('Изображение 3'),
     )
+    serial_number = models.PositiveIntegerField(
+        unique=True,
+        verbose_name=_('Порядковый номер'),
+    )
 
     class Meta:
         """Настройки модели"""
 
         verbose_name = _('Раздел')
         verbose_name_plural = _('Разделы')
+        ordering = ('serial_number', )
 
     def __str__(self):
         return self.title

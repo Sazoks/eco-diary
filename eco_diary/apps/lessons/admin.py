@@ -6,8 +6,8 @@ from . import models
 
 @admin.register(models.Unit)
 class UnitAdmin(admin.ModelAdmin):
-    list_display = ('title', )
-    list_display_links = ('title', )
+    list_display = ('__str__', )
+    list_display_links = ('__str__', )
 
 
 @admin.register(models.Research)

@@ -6,6 +6,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import strip_tags
 
 
 class Unit(models.Model):
@@ -62,7 +63,7 @@ class Unit(models.Model):
         return hasattr(self, 'research')
 
     def __str__(self):
-        return self.title
+        return strip_tags(self.title)
 
 
 class Research(models.Model):
@@ -74,6 +75,10 @@ class Research(models.Model):
         verbose_name=_('Название страницы в URL'),
         help_text=_('Если Вы хотите получить URL-адрес вида https://domain/p'
                     'age, тогда просто введите page.'),
+    )
+    background_img = models.ImageField(
+        upload_to='researches/background',
+        verbose_name=_('Задний фон'),
     )
     content = RichTextUploadingField(
         null=True,
@@ -153,7 +158,7 @@ class Lesson(models.Model):
     serial_number = models.CharField(
         max_length=32,
         verbose_name=_('Порядковый номер'),
-        help_text=_('Порядковый номер вида "Урок 1-2".'),
+        help_text=_('Порядковый номер вида "1-2".'),
     )
     background_image = models.ImageField(
         upload_to='lessons/background',

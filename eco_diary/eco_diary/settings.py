@@ -173,6 +173,9 @@ CKEDITOR_UPLOAD_PATH = 'ckeditor/'
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
+        'extraPlugins': ','.join([
+            'html5video',
+        ]),
     },
     'minimal': {
         'toolbar': 'Custom',
@@ -181,6 +184,6 @@ CKEDITOR_CONFIGS = {
                 'name': 'colors',
                 'items': ['TextColor', 'BGColor'],
             }
-        ]
+        ],
     },
 }

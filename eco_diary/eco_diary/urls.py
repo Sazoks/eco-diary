@@ -31,6 +31,7 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    # Для debug_toolbar
     import debug_toolbar
     import mimetypes
     mimetypes.add_type("application/javascript", ".js", True)

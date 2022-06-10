@@ -1,3 +1,7 @@
+from typing import (
+    Optional,
+    Union,
+)
 from django.db import models
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -36,6 +40,27 @@ class Unit(models.Model):
         verbose_name_plural = _('Разделы')
         ordering = ('serial_number', )
 
+    def get_next_in_order(self) -> Optional['Unit']:
+        """Получение следующего раздела"""
+
+        next_unit = Unit.objects.filter(
+            serial_number__gt=self.serial_number
+        ).first()
+
+        return next_unit
+
+    def get_prev_in_order(self) -> Optional['Unit']:
+        """Получение предыдущего раздела"""
+
+        prev_unit = Unit.objects.filter(
+            serial_number__lt=self.serial_number
+        ).last()
+
+        return prev_unit
+
+    def has_research(self) -> bool:
+        return hasattr(self, 'research')
+
     def __str__(self):
         return self.title
 
@@ -68,6 +93,34 @@ class Research(models.Model):
 
         verbose_name = _('Исследование')
         verbose_name_plural = _('Исследования')
+
+    def get_next_unit_element(self) -> Optional[Union['Lesson', 'Research']]:
+        """Поиск следующего элемента в разделах"""
+
+        next_unit = self.unit.get_next_in_order()
+        if next_unit is not None:
+            next_unit_first_lesson = next_unit.lessons.first()
+            if next_unit_first_lesson is not None:
+                return next_unit_first_lesson
+            if next_unit.has_research():
+                return next_unit.research
+
+    def get_prev_unit_element(self) -> Optional[Union['Lesson', 'Research']]:
+        """Поиск предыдущего элемента в разделе"""
+
+        # Если есть последний урок, берем его.
+        last_lesson = self.unit.lessons.last()
+        if last_lesson is not None:
+            return last_lesson
+
+        # Иначе смотрим, есть ли что брать в предыдущем разделе.
+        prev_unit = self.unit.get_prev_in_order()
+        if prev_unit is not None:
+            # Если есть исследование, возвращаем его.
+            if prev_unit.has_research():
+                return prev_unit.research
+            # Иначе возвращаем последний урок. Если его нет, будет None.
+            return prev_unit.lessons.last()
 
     def __str__(self):
         return f'{_("Исследование")}#{self.pk}'
@@ -142,6 +195,62 @@ class Lesson(models.Model):
         verbose_name = _('Урок')
         verbose_name_plural = _('Уроки')
         order_with_respect_to = 'unit'
+
+    def get_next_unit_element(self) -> Optional[Union['Lesson', 'Research']]:
+        """
+        Поиск следующего элемента в разделах.
+
+        Если в текущем разделе урок - последний, то следующим элементом будет
+        исследование, либо первый урок в следующем разделе, либо ничего.
+        """
+
+        # Получение списка id уроков в порядке их следования.
+        lesson_id_list = list(self.unit.get_lesson_order())
+
+        # Если урок не последний в разделе, берем следующий урок.
+        if self.pk != lesson_id_list[-1]:
+            return self.get_next_in_order()
+
+        # Иначе если последний, тогда проверяем, есть ли в разделе
+        # исследование. Если есть - берем его.
+        elif self.unit.has_research():
+            return self.unit.research
+
+        # Если раздела нет, тогда смотрим, есть ли следующий раздел.
+        else:
+            next_unit = self.unit.get_next_in_order()
+            if next_unit is not None:
+                next_unit_first_lesson = next_unit.lessons.first()
+                if next_unit_first_lesson is not None:
+                    return next_unit_first_lesson
+                if next_unit.has_research():
+                    return next_unit.research
+
+    def get_prev_unit_element(self) -> Optional[Union['Lesson', 'Research']]:
+        """
+        Поиск предыдущего элемента в разделе.
+
+        Если текущий урок - первый, то предыдущим элементом будет исследование
+        в предудыщем разделе, либо последний урок в предыдущем разделе, либо
+        ничего.
+        """
+
+        # Получение списка id уроков в порядке их следования.
+        lesson_id_list = list(self.unit.get_lesson_order())
+
+        # Если урок не первый в разделе, берем предыдущий урок.
+        if self.pk != lesson_id_list[0]:
+            return self.get_previous_in_order()
+
+        # Иначе если урок первый, смотрим, есть ли предыдущий раздел.
+        elif self.unit.has_research():
+            prev_unit = self.unit.get_prev_in_order()
+            if prev_unit is not None:
+                # Если есть исследование, возвращаем его.
+                if prev_unit.has_research():
+                    return prev_unit.research
+                # Иначе возвращаем последний урок. Если его нет, будет None.
+                return prev_unit.lessons.last()
 
     def __str__(self):
         return self.title

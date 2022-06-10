@@ -72,12 +72,14 @@
                                             <img src="{{ unit.img_3.url }}" alt="">
                                         </div>
                                     </div>
+                                    {% if unit.has_research %}
                                     <a href="{% url 'lessons:research' unit.research.url_pattern %}" class="lessons__research">
                                         <div class="lessons__research-img">
                                             <img src="{% static 'img/research.png' %}" alt="Изображение исследования">
                                         </div>
                                         <div class="lessons__research-title">Исследование</div>
                                     </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

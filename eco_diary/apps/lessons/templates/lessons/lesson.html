@@ -28,7 +28,7 @@
                         </a>
                         <div class="lesson-top__theme">
                             <span class="lesson-top__badge">тема</span>
-                            <span class="lesson-top__title">{{ lesson.unit.title }}</span>
+                            <span class="lesson-top__title">{{ lesson.unit.title|safe }}</span>
                         </div>
                     </div>
                 </div>
@@ -224,7 +224,7 @@
                                 <div class="lesson-card__img">
                                     <img src="{% static 'img/research.png' %}" alt="Изображение предыдущего исследования">
                                 </div>
-                                <div class="lesson-card__title">Исследование "{{ prev_research.unit.title }}"</div>
+                                <div class="lesson-card__title">Исследование {{ prev_research.unit.title|safe }}</div>
                             </a>
                             {% endif %}
                         </div>
@@ -244,7 +244,7 @@
                                 <div class="lesson-card__img">
                                     <img src="{% static 'img/research.png' %}" alt="Изображение следующего исследования">
                                 </div>
-                                <div class="lesson-card__title">Исследование "{{ next_research.unit.title }}"</div>
+                                <div class="lesson-card__title">Исследование {{ next_research.unit.title|safe }}</div>
                             </a>
                             {% endif %}
                         </div>

@@ -47,72 +47,31 @@ class LessonView(DetailView):
         """Формирование контекста шаблона"""
 
         context = super(LessonView, self).get_context_data(**kwargs)
-        # Добавляем в контекст данны о следующем и предыдущем элементах.
-        context.update(**self._get_prev_next_elements())
+
+        # Добавляем в контекст данные о соседних элементах.
+        neighbors_elements = {
+            'prev_lesson': None,
+            'next_lesson': None,
+            'prev_research': None,
+            'next_research': None,
+        }
+
+        # Получаем соседние элементы и сохраняем их в словарь.
+        prev_element = self.object.get_prev_unit_element()
+        next_element = self.object.get_next_unit_element()
+
+        if type(prev_element) is models.Lesson:
+            neighbors_elements['prev_lesson'] = prev_element
+        elif type(prev_element) is models.Research:
+            neighbors_elements['prev_research'] = prev_element
+        if type(next_element) is models.Lesson:
+            neighbors_elements['next_lesson'] = next_element
+        elif type(next_element) is models.Research:
+            neighbors_elements['next_research'] = next_element
+
+        context.update(**neighbors_elements)
 
         return context
-
-    def _get_prev_next_elements(self):
-        """
-        Получение предыдущего и следующего элементов.
-
-        Предыдущий и следующий элемент могут быть либо уроками, либо
-        исследованиями, если такие имеются.
-
-        :return: Словарь с предыдущим и следющим элементами.
-        """
-
-        # Предыдущий и следующий уроки.
-        prev_lesson: Optional[models.Lesson] = None
-        next_lesson: Optional[models.Lesson] = None
-
-        # Предыдущее и следующее исследования.
-        prev_research: Optional[models.Research] = None
-        next_research: Optional[models.Research] = None
-
-        # Список не может быть пустым, т.к. формирование контекст шаблона
-        # урока не запустилось бы, если бы не было хотя бы одного урока.
-        lesson_id_list = list(self.object.unit.get_lesson_order())
-        first_lesson_id = lesson_id_list[0]
-        last_lesson_id = lesson_id_list[-1]
-
-        # Если урок находится посередине раздела, просто берем соседние уроки.
-        if self.object.pk != first_lesson_id and self.object.pk != last_lesson_id:
-            prev_lesson = self.object.get_previous_in_order()
-            next_lesson = self.object.get_next_in_order()
-        # Иначе урок либо первый, либо последний.
-        else:
-            # Получаем все разделы и позицию текущего раздела среди всех.
-            units = models.Unit.objects.all()
-            current_unit_index = -1
-            for i, unit in enumerate(units):
-                if unit.pk == self.object.unit.pk:
-                    current_unit_index = i
-                    break
-
-            # Если урок в разделе всего один.
-            if len(lesson_id_list) == 1:
-                next_research = self.object.unit.research
-                if current_unit_index > 0:
-                    prev_research = units[current_unit_index - 1].research
-            # Если урок первый, но есть и другие уроки.
-            elif self.object.pk == first_lesson_id:
-                # Если раздел не первый, тогда указываем на исследование в
-                # предыдущем разделе.
-                if current_unit_index > 0:
-                    prev_research = units[current_unit_index - 1].research
-                next_lesson = self.object.get_next_in_order()
-            # Если урок последний, но есть и другие уроки.
-            elif self.object.pk == last_lesson_id:
-                next_research = self.object.unit.research
-                prev_lesson = self.object.get_previous_in_order()
-
-        return {
-            'prev_lesson': prev_lesson,
-            'next_lesson': next_lesson,
-            'prev_research': prev_research,
-            'next_research': next_research,
-        }
 
 
 class ResearchView(DetailView):
@@ -146,41 +105,28 @@ class ResearchView(DetailView):
         """Получение контекста для шаблона"""
 
         context = super(ResearchView, self).get_context_data(**kwargs)
-        # Добавляем следующий и предыдущий уроки.
-        context.update(**self._get_prev_next_element())
+
+        # Добавляем в контекст данные о соседних элементах.
+        neighbors_elements = {
+            'prev_lesson': None,
+            'next_lesson': None,
+            'prev_research': None,
+            'next_research': None,
+        }
+
+        # Получаем соседние элементы и сохраняем их в словарь.
+        prev_element = self.object.get_prev_unit_element()
+        next_element = self.object.get_next_unit_element()
+
+        if type(prev_element) is models.Lesson:
+            neighbors_elements['prev_lesson'] = prev_element
+        elif type(prev_element) is models.Research:
+            neighbors_elements['prev_research'] = prev_element
+        if type(next_element) is models.Lesson:
+            neighbors_elements['next_lesson'] = next_element
+        elif type(next_element) is models.Research:
+            neighbors_elements['next_research'] = next_element
+
+        context.update(**neighbors_elements)
 
         return context
-
-    def _get_prev_next_element(self):
-        """
-        Получение предыдущего и следующего элементов.
-
-        Предыдущим элементом может быть только последний урок в текущем
-        разделе, а следующим - первый урок в следующем разделе, если такие
-        существуют.
-
-        :return: Словарь с предыдущим и следующим элементами.
-        """
-
-        prev_lesson: Optional[models.Lesson] = self.object.unit.lessons.last()
-        next_lesson: Optional[models.Lesson] = None
-
-        # Определение позиции текущего раздела.
-        units = models.Unit.objects.all()
-        current_unit_index = -1
-        for i, unit in enumerate(units):
-            if unit.pk == self.object.unit.pk:
-                current_unit_index = i
-                break
-
-        # Если текущий раздел не последний, то берем первый урок в
-        # следующем разделе.
-        if current_unit_index < units.count() - 1:
-            next_unit = units[current_unit_index + 1]
-            if next_unit.lessons.exists():
-                next_lesson = units[current_unit_index + 1].lessons.first()
-
-        return {
-            'prev_lesson': prev_lesson,
-            'next_lesson': next_lesson,
-        }

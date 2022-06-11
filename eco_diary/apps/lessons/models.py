@@ -32,6 +32,8 @@ class Unit(models.Model):
     serial_number = models.PositiveIntegerField(
         unique=True,
         verbose_name=_('Порядковый номер'),
+        help_text=_('Этот параметр определяет позицию раздела '
+                    'среди всех разделов.')
     )
 
     class Meta:
@@ -248,7 +250,7 @@ class Lesson(models.Model):
             return self.get_previous_in_order()
 
         # Иначе если урок первый, смотрим, есть ли предыдущий раздел.
-        elif self.unit.has_research():
+        else:
             prev_unit = self.unit.get_prev_in_order()
             if prev_unit is not None:
                 # Если есть исследование, возвращаем его.

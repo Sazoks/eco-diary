@@ -79,6 +79,7 @@
                             {% endif %}
                         </div>
                         
+                        {% if lesson.slides.exists %}
                         <div class="lesson__images">
                             {% for slide in lesson.slides.all %}
                             {% if forloop.counter0 == 0 %}
@@ -90,7 +91,9 @@
                             </div>
                             {% endfor %}
                         </div>
+                        {% endif %}
 
+                        {% if lesson.trainer %}
                         <div class="train">
                             <img src="{% static 'img/lump.webp' %}" alt="Изображение для тренажера" class="lesson__icon train__img">
                             <div class="lesson__subtitle train__title">Тренажёр</div>
@@ -115,6 +118,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
 
                         <div class="interesting">
                             <div class="interesting__wrap">
@@ -129,6 +133,7 @@
                             </div>
                         </div>
 
+                        {% if lesson.game %}
                         <div class="game">
                             <img src="{% static 'img/game.webp' %}" alt="Икона для игры" class="lesson__icon game__img">
                             <div class="lesson__subtitle game__title">Игра</div>
@@ -159,6 +164,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
 
                         <div class="fact">
                             <div class="fact__left">
@@ -171,6 +177,7 @@
                             </div>
                         </div>
 
+                        {% if lesson.practical_steps.exists %}
                         <div class="detective">
                             <div class="detective__top">
                                 <img src="{% static 'img/detective.webp' %}" alt="Иконка практического задания" class="lesson__icon detective__img">
@@ -190,7 +197,9 @@
                                 {% endfor %}
                             </div>
                         </div>
+                        {% endif %}
 
+                        {% if lesson.add_materials.exists %}
                         <div class="additional">
                             <div class="additional__top">
                                 <img src="{% static 'img/additional.svg' %}" alt="Иконка дополнительного материала" class="lesson__icon additional__img">
@@ -209,6 +218,7 @@
                                 {% endfor %}
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </section>

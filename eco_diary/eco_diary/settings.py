@@ -32,7 +32,7 @@ DEBUG = config('DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS',
     cast=Csv(),
-    default=['127.0.0.1', '0.0.0.0'],
+    default='127.0.0.1,0.0.0.0',
 )
 
 

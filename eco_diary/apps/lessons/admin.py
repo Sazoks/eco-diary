@@ -46,7 +46,7 @@ class LessonAdmin(admin.ModelAdmin):
         (_('Основная информация'), {
             'fields': (
                 'title', 'preview', 'serial_number',
-                'background_image', 'practical_title',
+                'background_image',
             ),
         }),
         (_('Это интересно'), {
@@ -55,6 +55,11 @@ class LessonAdmin(admin.ModelAdmin):
         (_('Факт'), {
             'fields': ('fact_img', 'fact_text'),
         }),
+        (_('Практическое задание'), {
+            'fields': ('practical_title', 'required_materials',
+                       'practical_task'),
+            'description': _('Шаги практического задания расположены ниже.'),
+        })
     )
     list_filter = ('unit', )
 

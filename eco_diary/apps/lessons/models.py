@@ -188,6 +188,18 @@ class Lesson(models.Model):
         blank=True,
         verbose_name=_('Название практического задания'),
     )
+    required_materials = models.TextField(
+        max_length=4096,
+        null=True,
+        blank=True,
+        verbose_name=_('Необходимые материалы'),
+    )
+    practical_task = RichTextField(
+        max_length=4096,
+        null=True,
+        blank=True,
+        verbose_name=_('Задание'),
+    )
     unit = models.ForeignKey(
         to=Unit,
         on_delete=models.CASCADE,

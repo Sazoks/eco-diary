@@ -183,6 +183,18 @@
                                 <img src="{% static 'img/detective.webp' %}" alt="Иконка практического задания" class="lesson__icon detective__img">
                                 <div class="lesson__subtitle detective__title">{{ lesson.practical_title }}</div>
                                 <div class="detective__badge">Практическое задание</div>
+                                {% if lesson.required_materials != '' and lesson.practical_task != '' %}
+                                <div class="detective__info">
+                                    <div class="detective__info-item">
+                                        <div class="detective__info-title">Необходимые материалы:</div>
+                                        <div class="detective__info-desc">{{ lesson.required_materials }}</div>
+                                    </div>
+                                    <div class="detective__info-item">
+                                        <div class="detective__info-title">Задание:</div>
+                                        <div class="detective__info-desc">{{ lesson.practical_task|safe }}</div>
+                                    </div>
+                                </div>
+                                {% endif %}
                             </div>
 
                             <div class="detective__steps">

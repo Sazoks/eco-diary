@@ -135,7 +135,9 @@
                     <nav class="footer__nav">
                         <a href="{% url 'main:index' %}" class="footer__nav-link">Главная</a>
                         <a href="{% url 'lessons:units' %}" class="footer__nav-link">Уроки</a>
-                        <a href="{% url 'main:about' %}" class="footer__nav-link">О проекте</a>
+                        {% for element in footer_menu %}
+                            <a href="{% url 'pages:static_page' element.url_pattern %}" class="footer__nav-link">{{ element.title }}</a>
+                        {% endfor %}
                     </nav>
                 </div>
             </div>

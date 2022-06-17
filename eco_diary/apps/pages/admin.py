@@ -12,12 +12,12 @@ class StaticPageAdmin(admin.ModelAdmin):
 
     list_display = ('title', 'date_last_change', 'date_add')
     list_display_links = ('title', )
-    list_filter = ('in_menu', )
+    list_filter = ('in_menu', 'in_footer')
     fieldsets = (
         (_('Системная информация'), {
-            'fields': ('url_pattern', 'preview', 'description', 'in_menu'),
+            'fields': ('url_pattern', 'description', 'in_menu', 'in_footer'),
         }),
         (_('Основная информация'), {
-            'fields': ('title', 'content'),
+            'fields': ('title', 'subtitle', 'preview', 'content'),
         }),
     )

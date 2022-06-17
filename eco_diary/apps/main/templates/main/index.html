@@ -18,21 +18,20 @@
         <header class='header'>
             <div class='container'>
                 <div class='header__inner'>
-                    <a href="" class="header__logo">
+                    <a href="{% url 'main:index' %}" class="header__logo">
                         <img src="{% static 'img/logo.svg' %}" alt="">
                     </a>
                     <button class="header__burger"></button>
                     <div class="header__mob">
-                        <a href="" class="header__green">
+                        <a href="http://зеленыйтатарстан.рф/" class="header__green">
                             <img src="{% static 'img/greenTat.svg' %}" alt="">
                         </a>
-                        <a href="" class="header__eko">
+                        <a href="https://akbars.ru" class="header__eko">
                             <img src="{% static 'img/akbars.png' %}" alt="">
                         </a>
                         <nav class="nav">
                             <a href="{% url 'main:index' %}" class="nav__link nav__link--active">ГЛАВНАЯ</a>
                             <a href="{% url 'lessons:units' %}" class="nav__link">УРОКИ</a>
-                            <a href="{% url 'main:about' %}" class="nav__link">О ПРОЕКТЕ</a>
                             {% for menu_element in menu %}
                             <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link">{{ menu_element.title|upper }}</a>
                             {% endfor %}
@@ -130,7 +129,9 @@
                     <nav class="footer__nav">
                         <a href="{% url 'main:index' %}" class="footer__nav-link">Главная</a>
                         <a href="{% url 'lessons:units' %}" class="footer__nav-link">Уроки</a>
-                        <a href="{% url 'main:about' %}" class="footer__nav-link">О проекте</a>
+                        {% for element in footer_menu %}
+                            <a href="{% url 'pages:static_page' element.url_pattern %}" class="footer__nav-link">{{ element.title }}</a>
+                        {% endfor %}
                     </nav>
                 </div>
             </div>

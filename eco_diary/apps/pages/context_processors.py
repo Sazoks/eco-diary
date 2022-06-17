@@ -10,4 +10,7 @@ from .models import StaticPage
 def add_menu(request: HttpRequest) -> Dict[str, Any]:
     """Добавление в контекст шаблона меню из статичных страниц"""
 
-    return {'menu': StaticPage.objects.filter(in_menu=True)}
+    return {
+        'menu': StaticPage.objects.filter(in_menu=True),
+        'footer_menu': StaticPage.objects.filter(in_footer=True),
+    }

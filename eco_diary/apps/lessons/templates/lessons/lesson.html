@@ -219,7 +219,7 @@
                             </div>
                             <div class="additional__items">
                                 {% for material in lesson.add_materials.all %}
-                                <a href="{{ material.url }}" class="additional__item">
+                                <a href="{{ material.url }}" target="_blank" class="additional__item">
                                     <div class="additional__item-img">
                                         <img src="{{ material.image.url }}" alt="Изображение доп. материала {{ forloop.counter }}">
                                     </div>
@@ -290,7 +290,9 @@
                     <nav class="footer__nav">
                         <a href="{% url 'main:index' %}" class="footer__nav-link">Главная</a>
                         <a href="{% url 'lessons:units' %}" class="footer__nav-link">Уроки</a>
-                        <a href="{% url 'main:about' %}" class="footer__nav-link">О проекте</a>
+                        {% for element in footer_menu %}
+                            <a href="{% url 'pages:static_page' element.url_pattern %}" class="footer__nav-link">{{ element.title }}</a>
+                        {% endfor %}
                     </nav>
                 </div>
             </div>

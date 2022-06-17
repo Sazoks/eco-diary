@@ -10,41 +10,40 @@
     <meta name="keywords" content="">
     <link rel="stylesheet" href="{% static 'css/libs.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
-    <title>Урок</title>
+    <title>{{ page.title }}</title>
 </head>
 
 <body>
     <div class="wrapper">
         <header class='header'>
-    <div class='container'>
-        <div class='header__inner'>
-            <a href="" class="header__logo">
-                <img src="{% static 'img/logo.svg' %}" alt="">
-            </a>
-            <button class="header__burger"></button>
-            <div class="header__mob">
-                <a href="" class="header__green">
-                    <img src="{% static 'img/greenTat.svg' %}" alt="">
-                </a>
-                <a href="" class="header__eko">
-                    <img src="{% static 'img/akbars.png' %}" alt="">
-                </a>
-                <nav class="nav">
-                    <a href="{% url 'main:index' %}" class="nav__link">ГЛАВНАЯ</a>
-                    <a href="{% url 'lessons:units' %}" class="nav__link">УРОКИ</a>
-                    <a href="{% url 'main:about' %}" class="nav__link">О ПРОЕКТЕ</a>
-                    {% for menu_element in menu %}
-                    {% if menu_element.pk == page.pk %}
-                    <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link nav__link--active">{{ menu_element.title|upper }}</a>
-                    {% else %}
-                    <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link">{{ menu_element.title|upper }}</a>
-                    {% endif %}
-                    {% endfor %}
-                </nav>
+            <div class='container'>
+                <div class='header__inner'>
+                    <a href="{% url 'main:index' %}" class="header__logo">
+                        <img src="{% static 'img/logo.svg' %}" alt="">
+                    </a>
+                    <button class="header__burger"></button>
+                    <div class="header__mob">
+                        <a href="http://зеленыйтатарстан.рф/" class="header__green">
+                            <img src="{% static 'img/greenTat.svg' %}" alt="">
+                        </a>
+                        <a href="https://akbars.ru" class="header__eko">
+                            <img src="{% static 'img/akbars.png' %}" alt="">
+                        </a>
+                        <nav class="nav">
+                            <a href="{% url 'main:index' %}" class="nav__link">ГЛАВНАЯ</a>
+                            <a href="{% url 'lessons:units' %}" class="nav__link">УРОКИ</a>
+                            {% for menu_element in menu %}
+                            {% if menu_element.pk == page.pk %}
+                            <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link nav__link--active">{{ menu_element.title|upper }}</a>
+                            {% else %}
+                            <a href="{% url 'pages:static_page' menu_element.url_pattern %}" class="nav__link">{{ menu_element.title|upper }}</a>
+                            {% endif %}
+                            {% endfor %}
+                        </nav>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</header>
+        </header>
         <main class="content">
 
             <section class='about'>
@@ -52,6 +51,14 @@
                     <div class="about__title display1">{{ page.title }}</div>
                 </div>
                 <div class='container'>
+                    {% if page.subtitle != '' %}
+                    <div class="about__subtitle">{{ page.subtitle|safe }}</div>
+                    {% endif %}
+                    {% if page.preview != '' %}
+                    <div class="about__img">
+                        <img src="{{ page.preview.url }}" alt="Главное изображение страницы">
+                    </div>
+                    {% endif %}
                     <div class="about__desc">
                         {{ page.content|safe }}
                     </div>
@@ -64,9 +71,11 @@
                 <div class='footer__inner'>
                     <div class="footer__by">2022 © Экологический дневник</div>
                     <nav class="footer__nav">
-                        <a href="" class="footer__nav-link">Главная</a>
-                        <a href="" class="footer__nav-link">Уроки</a>
-                        <a href="" class="footer__nav-link">О проекте</a>
+                        <a href="{% url 'main:index' %}" class="footer__nav-link">Главная</a>
+                        <a href="{% url 'lessons:units' %}" class="footer__nav-link">Уроки</a>
+                        {% for element in footer_menu %}
+                            <a href="{% url 'pages:static_page' element.url_pattern %}" class="footer__nav-link">{{ element.title }}</a>
+                        {% endfor %}
                     </nav>
                 </div>
             </div>

@@ -35,8 +35,8 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ('title', )
     list_display_links = ('title', )
     inlines = (
-        SliderInline,
         PracticalTaskStepInline,
+        SliderInline,
         AddMaterialInline,
     )
     fieldsets = (

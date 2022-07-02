@@ -2,8 +2,8 @@
 Сайт электронного дневника для школьников, в котором собраны уроки об окружающей среде.
 
 ## Детали проекта
-Проект разрабатывался на коммерческой основе на FL.ru.
-Цена: 30.000р
-Сроки: 15 дней
-Backend: Python, Django, MySQL, Apache
-Frontend: HTML5, CSS3, SCSS, JavaScript
+- Проект разрабатывался на коммерческой основе на FL.ru.
+- Цена: 30.000р
+- Сроки: 15 дней
+- Backend: Python, Django, MySQL, Apache
+- Frontend: HTML5, CSS3, SCSS, JavaScript

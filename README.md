@@ -8,4 +8,4 @@
 - Backend: Python, Django, MySQL, Apache
 - Frontend: HTML5, CSS3, SCSS, JavaScript
 
-Ссылка на рабочий сайт - ``http://eco.зеленыйтатарстан.рф/```
+Ссылка на рабочий сайт - http://eco.зеленыйтатарстан.рф/
